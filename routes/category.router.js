@@ -1,4 +1,5 @@
 const categoryController=require("../controllers/category.controller");
+const bodyValidatorMiddleware = require("../middlewares/bodyValidator");
 const idValidatorMiddleware = require("../middlewares/idValidator.middleware");
 const nameValidatorMiddleware = require("../middlewares/nameValidator.middleware");
 
@@ -8,9 +9,9 @@ categoryRouter.get('/',categoryController.getAll)
 
 categoryRouter.get('/:id',idValidatorMiddleware(),categoryController.getById)
 
-categoryRouter.post('/',nameValidatorMiddleware(),categoryController.insert)
+categoryRouter.post('/',bodyValidatorMiddleware(),categoryController.insert)
 
-categoryRouter.put('/:id',idValidatorMiddleware(),nameValidatorMiddleware(),categoryController.update)
+categoryRouter.put('/:id',idValidatorMiddleware(),bodyValidatorMiddleware(),categoryController.update)
 
 categoryRouter.delete('/:id',idValidatorMiddleware(),categoryController.delete)
 
