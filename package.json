@@ -1,0 +1,19 @@
+{
+  "name": "demo-express",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --env-file=.env app.js",
+    "dev":"node --watch --env-file=.env app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+    
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
