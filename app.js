@@ -20,8 +20,8 @@ const mongoose = require('mongoose')
 server.use(async(req, res,next)=>{
 
     try{
-        await mongoose.connect(DB_CONNECTION) //!voir code aude
-        console.log("Successfully  connected to the DB")
+        await mongoose.connect(DB_CONNECTION,{ dbName : 'TaskManager' }) 
+        console.log(" 😉 Successfully  connected to the DB 🌐")
         next()
         
         
@@ -29,7 +29,7 @@ server.use(async(req, res,next)=>{
 
     }catch(err){
         console.log(`Connection Failed\n[Reason]\n${err}`)
-        res.status(500).json({statusCode:500, message : 'Impossible de se connevcter à la base de donnée !'})
+        res.status(500).json({statusCode:500, message : '🙅Impossible de se connecter à la base de donnée !'})
 
     }
     
@@ -41,3 +41,4 @@ server.use('/api',router); //indiquer==>server utiliser le router
 server.listen(PORT,()=>{
     console.log (`Express server started on port ${PORT}`)
 });
+
