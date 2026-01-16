@@ -82,7 +82,7 @@ insert:(req,res)=>{
 
 update:(req,res)=>{
     const id =+req.params.id
-    const newTaskInfos =req.body //on les rec dans le body le snvl infos
+    const newTaskInfos =req.body.isDone//on les rec dans le body le snvl infos
     //*verifier si la tâche exoste
     const task=fakeTaskService.findById(id)
     if(!task){
@@ -93,6 +93,11 @@ update:(req,res)=>{
      const updatedTask = fakeTaskService.update(id,newTaskInfos)
      res.status(200).json(updatedTask)
 },
+/**
+    * Modifie le statut isDone d'une tâche
+    * @param { Request } req
+    * @param { Response } res
+    */
 
 updateStatus :(req,res)=>{
      const id =+req.params.id
@@ -106,6 +111,11 @@ updateStatus :(req,res)=>{
     const updatedTask = fakeTaskService.updateStatus(id,newStatus)
     res.status(200).json(updatedTask)
 },
+ /**
+    * Supprime une tâche
+    * @param { Request } req
+    * @param { Response } res
+    */
 
 delete :(req,res)=>{
      const id = +req.params.id

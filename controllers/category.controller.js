@@ -35,29 +35,32 @@ const categoryController ={
 
     },
 
-    insert: async (req,res)=> {
-        const categoryToAdd =req.body
-//*si il existe deja dans la db,erreur
-    try{
-        const exist = await categoryService.nameAlerdyExist(categoryToAdd.name)
-        if (exist){
-            res.status(409).json({statusCode:409,message:`la catégorie ${categoryToAdd.name} existe déjà 😅 !`})
+  // TODO : On a fait que le nameExists
+  insert: async (req, res) => {
+    const categoryToAdd = req.body;
 
+    try {
+        // Si le nom existe déjà en base de données, erreur
+        const exists = await categoryService.nameAlreadyExists(categoryToAdd.name)
+
+        if (exists) {
+            res.status(409).json({ statusCode: 409, message: `La catégorie ${categoryToAdd.name} existe déjà !` });
+        }
+        else {
+            //Si elle n'existe pas, on peut la créer
+            const insertedCategory = await categoryService.create(categoryToAdd);
+
+            res.location(`/api/categories/${insertedCategory.id}`)
+            res.status(201).json(insertedCategory);
         }
 
-}
-    catch(err){
-        res.sendStatus(500)
+    } catch (err) {
+        res.sendStatus(500);
+    }
 
-}
-       
-      //*si non 
-       const insertedCategory= fakeCategoryService.create(categoryToAdd)
-       
-       res.location(`/api/categories/${insertedCategory.id}`)
-       res.status(201).json(insertedCategory)
 
-    },
+},
+
 
     update: (req,res)=>{
         res.sendStatus(501)
