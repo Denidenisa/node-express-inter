@@ -3,6 +3,8 @@
 //! creer un objer "router"
 const tasksRouter = require('./task.router');
 const categoryRouter=require('./category.router');
+const authRouter = require('./auth.router');
+
 const router = require('express').Router();
 
 
@@ -17,4 +19,9 @@ router.use('/tasks',tasksRouter);
 
 router.use('/categories',categoryRouter);
 
+
+router.use('/auth',authRouter);
+
+
+//rendre exportable notre objet router
 module.exports = router;
