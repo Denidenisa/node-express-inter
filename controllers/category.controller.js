@@ -11,7 +11,7 @@ const categoryController ={
             res.status(200).json(categories)
         }catch(err){
             console.log(err)
-            res.status(500).json({statusCode:500, message:'Erreur avec la DB'})
+            res.status(500).json({statusCode:500, message:'Erreur avec la DB 🌐'})
         }
         
     },
@@ -21,14 +21,14 @@ const categoryController ={
          try {
          const category = await categoryService.findById(id)
          if(!category){
-            res.status(404).json({statusCode:404,message:`La catégorie ${id} n\'existe pas`})
+            res.status(404).json({statusCode:404,message:`La catégorie ${id} n\'existe pas 😓`})
          }
          res.status(200).json(category) 
 
          
          }
          catch(err){
-            res.status(500).json ({stausCode:50,message: 'Erreur de la DB'})
+            res.status(500).json ({stausCode:50,message: 'Erreur de la DB 🌐 '})
          }
 
          

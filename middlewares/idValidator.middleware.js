@@ -13,7 +13,7 @@ const idValidatorMiddleware=()=>{
         if (isNaN(id)){
 
             //si pas un nb ==> stop la requete
-            res.status(400).json({statusCode:400, message:'L\'id doit être un nombre entier' })
+            res.status(400).json({statusCode:400, message:'L\'id doit être un nombre entier 😌' })
 
         }
         //si c ets un nombre, on continue la requqete

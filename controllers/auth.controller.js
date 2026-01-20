@@ -1,14 +1,15 @@
 const authService = require("../mongo/auth.service");
+const jwUtils = require("../utils/jwt.utils");
 
 const authController ={
-
+ 
 
   register :async(req,res)=>{
     try{ // on récupère le body de la requête qui contient les infos de l'utilisateurs
       const userToAdd =req.body
       // verifir si l email n'es pas déjà utilisé
       if (await authService.emailAlreadyExist(userToAdd.email)){
-        res.status(409).json( {statusCode: 409, message:'Cet email est déja utilisé'})
+        res.status(409).json( {statusCode: 409, message:'Cet email est déja utilisé 😣'})
 
 
 
@@ -32,14 +33,16 @@ const authController ={
         const userFound=await authService.findByCredentials(credentials)
         //si pas d'utilisateur trouvé, les infos de connexion ne sont pas bonnes.
         if(!userFound){
-          res.status(401).json({statusCode :401, message: 'Les informations de connexion ne sont pas bonnes.'})
+          res.status(401).json({statusCode :401, message: 'Les informations de connexion ne sont pas bonnes. 🤨'})
         }else{
-          res.status(200).json({id:userFound._id,firstname:userFound.firstname,lastname:userFound.lastname})
+          const token =await jwUtils.generate(userFound)
+          //*on va lui générer un token 
+          //* on va renvoyer quelques infos à l'utilisateur + son token 
+          res.status(200).json({id:userFound._id,firstname:userFound.firstname,lastname:userFound.lastname,token})
         }
 
       }catch(err){
         console.log(err);
-      
       res.sendStatus(500)
       }
 

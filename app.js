@@ -29,7 +29,7 @@ server.use(async(req, res,next)=>{
 
     }catch(err){
         console.log(`Connection Failed\n[Reason]\n${err}`)
-        res.status(500).json({statusCode:500, message : '🙅Impossible de se connecter à la base de donnée !'})
+        res.status(500).json({statusCode:500, message : '🙅Impossible de se connecter à la base de donnée 🌐 !'})
 
     }
     
@@ -39,6 +39,6 @@ server.use('/api',router); //indiquer==>server utiliser le router
 
 
 server.listen(PORT,()=>{
-    console.log (`Express server started on port ${PORT}`)
+    console.log (`Express server started on port ${PORT} 🚪 `)
 });
 

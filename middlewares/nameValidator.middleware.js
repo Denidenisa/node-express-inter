@@ -21,7 +21,7 @@ const nameValidatorMiddleware=()=>{
             //*res.status(400).json({stausCode:400, message:'Ca va pas bien ?!?'})
             //*}
             if(name.includes(word)){
-                res.status(400).json({stausCode:400, message:'Ca va pas bien ?!?'})
+                res.status(400).json({stausCode:400, message:'Ca va pas bien 😬😧 ?!?'})
 
             }
         }

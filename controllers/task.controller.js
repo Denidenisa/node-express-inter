@@ -22,7 +22,7 @@ getAll :async(req,res) =>{          //*😀
 
     }catch(err){
      console.log(err)
-     res.status(500).json({statusCode:500, message:'Erreur avec la DB'})
+     res.status(500).json({statusCode:500, message:'Erreur avec la DB 🌐'})
 
     }
 
@@ -53,10 +53,10 @@ getById:async (req,res)=>{
           const id = req.params.id
           const task=await taskService.findbyId(id)
           if(!task){
-               res.status(404).json({statusCode:404,message:`La tâche ${id} n\'existe pas`})
+               res.status(404).json({statusCode:404,message:`La tâche ${id} n\'existe pas 😓`})
           }res.status(200).json
      }catch(err){
-            res.status(500).json ({stausCode:50,message: 'Erreur de la DB'})
+            res.status(500).json ({statusCode:500,message: 'Erreur de la DB🌐'})
 
      }
      //les parametres récuperes seront tj sous forme de chaine de caract. 

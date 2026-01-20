@@ -1,6 +1,8 @@
 
 const taskController=require('../controllers/task.controller');
 const bodyValidatorMiddleware = require('../middlewares/bodyValidator');
+const authentificaionMiddleware=require('../middlewares/auth/authentification.middleware');
+const userAuthorizationMiddleware=require('../middlewares/auth/userAuthorization.middleware');
 
 
 
@@ -8,7 +10,7 @@ const tasksRouter=require('express').Router();
 
 tasksRouter.route('/')
     .get(taskController.getAll)
-    .post(bodyValidatorMiddleware(),taskController.insert)
+    .post(authentificaionMiddleware(),bodyValidatorMiddleware(),taskController.insert)
     
 
 tasksRouter.route('/:id')
@@ -16,7 +18,7 @@ tasksRouter.route('/:id')
     .put(bodyValidatorMiddleware(),taskController.update)
     .delete(taskController.delete)
     .patch(bodyValidatorMiddleware(),taskController.updateStatus)
-tasksRouter.get('/user/:name',taskController.getByUser)
+tasksRouter.get('/user/:id',authentificaionMiddleware(),userAuthorizationMiddleware(),taskController.getByUser)
 
 
 module.exports = tasksRouter;
