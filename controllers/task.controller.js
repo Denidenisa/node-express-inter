@@ -10,10 +10,12 @@ const taskController ={
      * @param {Request}req
      * @param {Response}res
      */
-getAll :async(req,res) =>{          //*😀
+getAll :async(req,res) =>{    
+     const query =req.query
+     //*console.log(query)  quary,même si y'en a pas,sera toujours un objet vide     //*😀
 
     try{
-     const tasks=await taskService.find()
+     const tasks=await taskService.find(query)
      const dataToSend={
           count:tasks.lenght,
           tasks
