@@ -1,5 +1,6 @@
 
 const Category = require("../models/category.model")
+const Task=require('../models/task.model')
 const categoryService={
   /*Creation de notre "vraie"service, ce sont les mêmes fonct que notr fakeService=>meme fonct*/
   find:async()=>{
@@ -23,7 +24,7 @@ const categoryService={
       return searchedCategory;
 
     }
-    catch { console.log(err)
+    catch (err) { console.log(err)
       throw new Error(err)
 
     }
@@ -49,6 +50,18 @@ const categoryService={
 
 
 },
+delete : async (id) => {
+  try {
+      const deletedCategory = await Category.findByIdAndDelete(id);
+      if(!deletedCategory) return false;
+      else return true;
+  }
+  catch(err) {
+      throw new Error(err);
+  }
+},
+
+
 
 
   nameAlerdyExist:async(name)=>{
@@ -71,7 +84,22 @@ const categoryService={
       throw new Error(err)
 
     }
+  },
+  isUsed : async(id) => {
+    try {
+
+        // On essaie de récupérer un moins une tâche qui a cet id comme categoryId
+        const task = await Task.findOne( { categoryId : id } )
+        //Si pas de tâche, aucune n'est liée à cette catégorie donc on renvoie faux, elle n'es pas utilisée
+        if(!task) return false;
+        //Si y'a une tâche, au moins une est reliée donc on renvoie vrai
+        else return true; 
+
+    }catch(err){
+        throw new Error(err)
+    }
   }
+
 
 }
 
