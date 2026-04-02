@@ -15,6 +15,20 @@ server.use(express.json()); //pour paramétrer le fait que notre API doit compre
 const logMiddleware = require('./middlewares/log.middleware');
 server.use(logMiddleware())
 
+//utilisation du middleware cors
+const cors=require('cors')
+
+//configuration tout le monde a acces a mon serveur (parfait pour du dev)
+server.use(cors())
+
+
+//configuration pour de la production, on veut autosriser notre app react.
+// server.use(cors({
+//     origin : 'http://localhost:5173',//'http:url_vercel>:5173
+//     methods:['GET','POST','PATCH','DELETE'],
+    
+// }))
+
 //*connection à la DB, créer un middleware qui établit  un connection à chaque rêquete
 const mongoose = require('mongoose')
 server.use(async(req, res,next)=>{
