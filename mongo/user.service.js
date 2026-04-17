@@ -1,35 +1,28 @@
+const User = require("../models/user.model");
 
-const User =require("../models/user.model")
-const userService={
-  find: async()=>{
-    try{
-      const { search } = query;
+const userService = {
+    
+    find: async (query) => {
+        try {
+            const { search } = query;
 
-            let searchFilter;
             let firstnameFilter;
             let lastnameFilter;
 
-            if(!search) {
-
+            if (!search) {
                 firstnameFilter = {};
                 lastnameFilter = {};
-
-            }else {
-                searchFilter = { $regex : new RegExp(search, 'i')};
-
-                firstnameFilter = { firstname : searchFilter };
-                lastnameFilter = { lastname : searchFilter };
-
+            } else {
+                const searchFilter = { $regex: new RegExp(search, 'i') };
+                firstnameFilter = { firstname: searchFilter };
+                lastnameFilter = { lastname: searchFilter };
             }
 
-            console.log(firstnameFilter);
-            console.log(lastnameFilter);
-            
             const users = await User.find().or([firstnameFilter, lastnameFilter])
-            .select(['_id', 'firstname', 'lastname', 'createdAt', 'updatedAt']);
+                .select(['_id', 'firstname', 'lastname', 'createdAt', 'updatedAt']);
             return users;
 
-        }catch(err){
+        } catch (err) {
             throw new Error(err);
         }
     }

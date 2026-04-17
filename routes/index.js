@@ -24,7 +24,7 @@ router.use('/categories',categoryRouter);
 router.use('/auth',authRouter);
 
 
-router.use('/user',userRouter)
+router.use('/users',userRouter)
 
 
 //rendre exportable notre objet router
