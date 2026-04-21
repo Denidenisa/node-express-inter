@@ -176,7 +176,7 @@ delete :async(req,res)=>{
      try{ 
           const id = req.params.id
           if(taskService.delete(id)){
-                 res.sendstatus(204)
+                 res.sendStatus(204)
                     }
                    else {
                

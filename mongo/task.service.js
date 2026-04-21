@@ -1,3 +1,5 @@
+const Task = require('../models/task.model')
+
 const taskService = {
   find: async (query) => {
       try {
@@ -139,7 +141,7 @@ const taskService = {
       }
 
     },
-    delte:async(id)=>{ 
+    delete:async(id)=>{ 
       try{ 
         const deletedTask=await Task.findByIdAndDelete(id)
         if(deletedTask){
